@@ -1,17 +1,17 @@
 from django import forms
-from eventos.models import Evento
+from eventos.models import Event
 
 
-class EventoForm(forms.ModelForm):
+class EventForm(forms.ModelForm):
     class Meta:
-        model = Evento
-        fields = ['titulo', 'descripcion', 'fecha_inicio', 'fecha_fin', 'ubicacion']
+        model = Event
+        fields = ['header', 'description', 'location', 'start_date', 'end_date' ]
         widgets = {
-            'fecha_inicio': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
-            'fecha_fin': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+            'start_date': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+            'end_date': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
         }
 
 class ParticipanteForm(forms.Form):
-    nombre = forms.CharField(max_length=100, label='Nombre')
+    name = forms.CharField(max_length=100, label='Nombre')
     email = forms.EmailField(label='Correo Electrónico')
-    evento = forms.ModelChoiceField(queryset=Evento.objects.all(), label='Evento')
+    event = forms.ModelChoiceField(queryset=Event.objects.all(), label='Event')

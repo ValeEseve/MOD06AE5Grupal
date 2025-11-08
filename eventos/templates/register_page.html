@@ -1,0 +1,87 @@
+{% block content %}
+<div class="container">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h3 class="card-title mb-3 text-center">Crear cuenta</h3>
+
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+            </div>
+            {% endfor %}
+            {% endif %}
+
+            {% if form.non_field_errors %}
+            <div class="alert alert-danger">
+                {{ form.non_field_errors }}
+            </div>
+            {% endif %}
+
+            <form method="post" novalidate>
+                {% csrf_token %}
+
+                <!-- Render fields: adapt names to your form (username, email, password1, password2, first_name, last_name, ...) -->
+                <div class="mb-3">
+                    {{ form.username.label_tag }}
+                    {{ form.username }}
+                    {% if form.username.errors %}
+                    <div class="text-danger small">{{ form.username.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    {{ form.email.label_tag }}
+                    {{ form.email }}
+                    {% if form.email.errors %}
+                    <div class="text-danger small">{{ form.email.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    {{ form.first_name.label_tag }}
+                    {{ form.first_name }}
+                    {% if form.first_name.errors %}
+                    <div class="text-danger small">{{ form.first_name.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    {{ form.last_name.label_tag }}
+                    {{ form.last_name }}
+                    {% if form.last_name.errors %}
+                    <div class="text-danger small">{{ form.last_name.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    {{ form.password1.label_tag }}
+                    {{ form.password1 }}
+                    {% if form.password1.errors %}
+                    <div class="text-danger small">{{ form.password1.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    {{ form.password2.label_tag }}
+                    {{ form.password2 }}
+                    {% if form.password2.errors %}
+                    <div class="text-danger small">{{ form.password2.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">Registrarse</button>
+                </div>
+
+            </form>
+
+            <hr>
+            <p class="text-center small mb-0">
+                ¿Ya tienes cuenta? <a href="{% url 'login' %}">Iniciar sesión</a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

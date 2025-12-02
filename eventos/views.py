@@ -12,3 +12,6 @@ def register_view(request):
 
 def add_evento(request):
     return render(request, 'add_event.html')
+
+def home(request):
+    return render(request, 'home.html')
